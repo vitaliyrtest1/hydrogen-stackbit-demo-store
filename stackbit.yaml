@@ -5,7 +5,14 @@ stackbitVersion: ~0.5.0
 ssgName: custom
 cmsName: contentful
 nodeVersion: '16'
-devCommand: npm run dev
+devCommand: echo Starting && APP_PORT={PORT} npm run dev-sb
+
+internalStackbitRunnerOptions:
+  displayName: Hydrogen
+  triggerInstallFiles: ['package.json', 'package-lock.json', 'yarn.lock']
+  triggerRestartFiles: ['package.json', 'package-lock.json', 'yarn.lock']
+  patterns:
+    doneStart: ['Local: http']
 
 # The "buildCommand" and the "publishDir" properties are used to configure the
 # serverless deployment platform when Stackbit creates a new site from this theme.

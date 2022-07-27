@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 import {defineConfig} from 'vite';
+import process from 'process';
 import hydrogen from '@shopify/hydrogen/plugin';
 import netlifyPlugin from '@netlify/hydrogen-platform/plugin';
 
@@ -15,5 +16,8 @@ export default defineConfig({
     globals: true,
     testTimeout: 10000,
     hookTimeout: 10000,
+  },
+  server: {
+    port: process.env.APP_PORT ? parseInt(process.env.APP_PORT, 10) : 3000,
   },
 });

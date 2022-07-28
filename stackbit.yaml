@@ -7,10 +7,8 @@ cmsName: contentful
 nodeVersion: '16'
 devCommand: echo Starting && APP_PORT={PORT} npm run dev-sb
 
-internalStackbitRunnerOptions:
+__unsafe_internal_stackbitRunnerOptions:
   displayName: Hydrogen
-  triggerInstallFiles: ['package.json', 'package-lock.json', 'yarn.lock']
-  triggerRestartFiles: ['package.json', 'package-lock.json', 'yarn.lock']
   patterns:
     doneStart: ['Local: http']
 

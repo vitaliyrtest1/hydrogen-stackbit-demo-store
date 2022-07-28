@@ -47,7 +47,6 @@ function JournalsGrid({pageBy}: {pageBy: number}) {
       postLayoutCollection: {items: posts},
     },
   } = useContentfulQuery({
-    key: ['articles'],
     query: BLOG_QUERY_CONT,
     variables: {
       limit: pageBy,

@@ -1,38 +1,31 @@
-import {CacheNone, useQuery} from '@shopify/hydrogen';
-
-const SPACE_ID = Oxygen.env.CONTENTFUL_SPACE_ID;
-const ACCESS_TOKEN = Oxygen.env.CONTENTFUL_PREVIEW_TOKEN;
-const CONTENTFUL_URL = `https://graphql.contentful.com/content/v1/spaces/${SPACE_ID}`;
+import {fetchSync, CacheNone} from '@shopify/hydrogen';
+import {CachingStrategy} from '@shopify/hydrogen/types';
 
 export const useContentfulQuery = ({
   query,
   variables,
-  key = [],
+  cache = CacheNone(),
 }: {
   query: string;
   variables: any;
-  key?: string[];
+  cache?: CachingStrategy;
 }) => {
-  const {data} = useQuery(
-    key,
-    async () => {
-      const response = await fetch(CONTENTFUL_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-        },
-        body: JSON.stringify({
-          query,
-          variables,
-        }),
-      });
-      return response.json();
-    },
-    {
-      cache: CacheNone(),
-    },
-  );
+  const SPACE_ID = Oxygen.env.CONTENTFUL_SPACE_ID;
+  const ACCESS_TOKEN = Oxygen.env.CONTENTFUL_PREVIEW_TOKEN;
+  const CONTENTFUL_URL = `https://graphql.contentful.com/content/v1/spaces/${SPACE_ID}`;
 
-  return data;
+  const response = fetchSync(CONTENTFUL_URL, {
+    cache,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+    },
+    body: JSON.stringify({
+      query,
+      variables,
+    }),
+  });
+
+  return response.json();
 };

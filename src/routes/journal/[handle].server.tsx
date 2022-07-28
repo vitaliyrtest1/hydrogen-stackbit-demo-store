@@ -31,7 +31,6 @@ export default function Post({params, response}: HydrogenRouteProps) {
       postLayoutCollection: {items},
     },
   } = useContentfulQuery({
-    key: ['article', handle],
     query: ARTICLE_QUERY,
     variables: {
       locale: 'en-US',

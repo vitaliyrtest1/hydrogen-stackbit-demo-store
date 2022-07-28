@@ -3,7 +3,7 @@ import {
   Seo,
   gql,
   Image,
-  CacheLong,
+  CacheShort,
   type HydrogenRouteProps,
   CacheNone,
 } from '@shopify/hydrogen';
@@ -18,7 +18,7 @@ import {Article, ArticleRaw} from '~/models/Article';
 const isProd = !import.meta.env.DEV;
 
 export default function Post({params, response}: HydrogenRouteProps) {
-  response.cache(isProd ? CacheLong() : CacheNone());
+  response.cache(isProd ? CacheShort() : CacheNone());
   const {
     language: {isoCode: languageCode},
     country: {isoCode: countryCode},

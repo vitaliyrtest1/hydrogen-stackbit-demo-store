@@ -1,5 +1,5 @@
 import {
-  CacheLong,
+  CacheShort,
   gql,
   type HydrogenRouteProps,
   Seo,
@@ -22,7 +22,7 @@ export default function Blog({
   pageBy = PAGINATION_SIZE,
   response,
 }: HydrogenRouteProps) {
-  response.cache(isProd ? CacheLong() : CacheNone());
+  response.cache(isProd ? CacheShort() : CacheNone());
 
   return (
     <Layout>
